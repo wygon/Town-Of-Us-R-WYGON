@@ -5,7 +5,7 @@
 
 An Among Us mod that adds a bunch of roles, modifiers and game settings
 
-Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or want to find people to play with!
+Join our [Discord - PL](https://discord.gg/QspGyKzf) if you have any problems or want to find people to play with!
 
 | **Impostor Roles**           | **Crewmate Roles**                | **Neutral Roles**                | **Modifiers**                |
 |:----------------------------:|:---------------------------------:|:--------------------------------:|:----------------------------:|
@@ -23,7 +23,7 @@ Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or wa
 | [Undertaker](#undertaker)    | [Medic](#medic)                   | [The Glitch](#the-glitch)        | [Multitasker](#multitasker)  |
 | [Venerer](#venerer)          | [Medium](#medium)                 | [Vampire](#vampire)              | [Radar](#radar)              |
 | [Warlock](#warlock)          | [Mystic](#mystic)                 | [Werewolf](#werewolf)            | [Saboteur](#saboteur)        |
-|                              | [Oracle](#oracle)                 |                                  | [Shy](#shy)                  |
+| [Noclip](#noclip)            | [Oracle](#oracle)                 |                                  | [Shy](#shy)                  |
 |                              | [Politician](#politician)         |                                  | [Sixth Sense](#sixth-sense)  |
 |                              | [Prosecutor](#prosecutor)         |                                  | [Sleuth](#sleuth)            |
 |                              | [Seer](#seer)                     |                                  | [Tiebreaker](#tiebreaker)    |
@@ -37,6 +37,7 @@ Join our [Discord](https://discord.gg/ugyc4EVUYZ) if you have any problems or wa
 |                              | [Veteran](#veteran)               |                                  |                              |
 |                              | [Vigilante](#vigilante)           |                                  |                              |
 |                              | [Warden](#warden)                 |                                  |                              |
+|                              | [Falcon](#falcon)                 |                                  |                              |
 -----------------------
 # Releases
 | Among Us - Version| Mod Version | Link |
