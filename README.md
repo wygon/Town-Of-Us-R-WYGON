@@ -1321,6 +1321,21 @@ Players who have been transported are alerted with a blue flash on their screen.
 | Transporter can use Vitals | Whether the Transporter has the ability to use Vitals | Toggle | False |
 
 -----------------------
+## Falcon
+### **Team: Crewmates**
+
+The Falcon is an Crewmate that can temporarily see more.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Falcon | The percentage probability of the Noclip appearing | Percentage | 0% |
+| Wingman Cooldown | The cooldown of the Wingman button | Time | 25s |
+| Wingman Duration | How long the Wingman lasts for | Time | 5s |
+| Wingman Uses | Whether the Wingman can be used | Number | 5 |
+| Wingman Range | Wingman's sight range | Number | 5 |
+
+-----------------------
 # Neutral Roles
 ## Amnesiac
 ### **Team: Neutral**
@@ -1620,6 +1635,20 @@ The Swooper is an Impostor that can temporarily turn invisible.
 | Swooper Cooldown | The cooldown of the Swooper's Swoop button | Time | 25s |
 | Swooper Duration | How long the Swooping lasts for | Time | 10s |
 | Swooper can Vent | Whether the Swooper can Vent | Toggle | False |
+
+-----------------------
+## Noclip
+### **Team: Impostors**
+
+The Noclip is an Impostor that can temporarily walk trought walls.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Noclip | The percentage probability of the Noclip appearing | Percentage | 0% |
+| Noclip Cooldown | The cooldown of the Noclip's WallRun button | Time | 25s |
+| Noclip Duration | How long the Noclip lasts for | Time | 5s |
+| Noclip can Vent | Whether the Noclip can Vent | Toggle | False |
 
 -----------------------
 ## Venerer
