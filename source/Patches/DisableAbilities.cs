@@ -5,6 +5,7 @@ using TownOfUs.Roles;
 using System.Collections;
 using InnerNet;
 using System.Collections.Generic;
+using TownOfUs.CrewmateRoles.TimeLordMod;
 
 namespace TownOfUs
 {
@@ -95,6 +96,11 @@ namespace TownOfUs
                     {
                         var falcon = Role.GetRole<Falcon>(PlayerControl.LocalPlayer);
                         if (falcon.isZoom) disableExtra = false;
+                    }
+                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord))
+                    {
+                        var timeLord = Role.GetRole<TimeLord>(PlayerControl.LocalPlayer);
+                        if (RecordRewind.rewinding) disableExtra = false;
                     }
 
                     if (HudManager.Instance.KillButton != null && disableKill)

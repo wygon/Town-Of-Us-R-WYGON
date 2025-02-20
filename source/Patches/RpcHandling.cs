@@ -40,6 +40,7 @@ using TownOfUs.CrewmateRoles.HunterMod;
 using Il2CppSystem.Linq;
 using TownOfUs.CrewmateRoles.DeputyMod;
 using TownOfUs.ImpostorRoles.NoclipMod;
+using TownOfUs.CrewmateRoles.TimeLordMod;
 
 namespace TownOfUs
 {
@@ -928,6 +929,16 @@ namespace TownOfUs
                                 break;
                         }
                         break;
+                    case CustomRPC.Rewind:
+                        readByte = reader.ReadByte();
+                        var TimeLordPlayer = Utils.PlayerById(readByte);
+                        var TimeLordRole = Role.GetRole<TimeLord>(TimeLordPlayer);
+                        StartStop.StartRewind(TimeLordRole);
+                        break;
+                    case CustomRPC.RewindRevive:
+                        readByte = reader.ReadByte();
+                        RecordRewind.ReviveBody(Utils.PlayerById(readByte));
+                        break;
                     case CustomRPC.Protect:
                         readByte1 = reader.ReadByte();
                         readByte2 = reader.ReadByte();
@@ -1590,6 +1601,9 @@ namespace TownOfUs
 
                 if (CustomGameOptions.FalconOn > 0)
                     CrewmateInvestigativeRoles.Add((typeof(Falcon), CustomGameOptions.FalconOn, false || CustomGameOptions.UniqueRoles));
+                
+                if (CustomGameOptions.TimeLordOn > 0)
+                    CrewmateInvestigativeRoles.Add((typeof(TimeLord), CustomGameOptions.TimeLordOn, false || CustomGameOptions.UniqueRoles));
 
                 if (CustomGameOptions.AltruistOn > 0)
                     CrewmateProtectiveRoles.Add((typeof(Altruist), CustomGameOptions.AltruistOn, true));

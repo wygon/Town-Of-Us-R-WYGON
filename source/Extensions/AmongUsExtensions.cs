@@ -76,7 +76,6 @@ namespace TownOfUs.Extensions
             }
             var newOutfit = playerControl.Data.Outfits[outfitType];
             playerControl.CurrentOutfitType = outfitType;
-            //playerControl.RawSetName(newOutfit.PlayerName + "\n" + newOutfit.ColorId);
             playerControl.RawSetName(newOutfit.PlayerName);
             playerControl.RawSetColor(newOutfit.ColorId);
             playerControl.RawSetHat(newOutfit.HatId, newOutfit.ColorId);

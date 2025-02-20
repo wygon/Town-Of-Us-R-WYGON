@@ -129,6 +129,7 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
             }
             else if (imitatorRole == RoleEnum.Engineer) new Engineer(ImitatingPlayer);
             else if (imitatorRole == RoleEnum.Falcon) new Falcon(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.TimeLord) new TimeLord(ImitatingPlayer);
             else if (imitatorRole == RoleEnum.Mayor)
             {
                 var mayor = new Mayor(ImitatingPlayer);

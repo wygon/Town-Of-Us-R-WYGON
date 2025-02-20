@@ -78,7 +78,8 @@ namespace TownOfUs
         Collect,
         Retribution,
         Camp,
-        //SetVisibility,
+        Rewind,
+        RewindRevive,
 
         BypassKill,
         BypassMultiKill,

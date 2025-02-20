@@ -333,6 +333,12 @@ namespace TownOfUs.Patches
                     {
                         AddRoleMessage(RoleEnum.Falcon);
                         return false;
+                    }                   
+                    else if (chatText.ToLower().StartsWith("/time") || chatText.ToLower().StartsWith("/ time")
+                    || chatText.ToLower().StartsWith("/tl") || chatText.ToLower().StartsWith("/ tl"))
+                    {
+                        AddRoleMessage(RoleEnum.TimeLord);
+                        return false;
                     }
                     else if (chatText.ToLower().StartsWith("/lover") || chatText.ToLower().StartsWith("/ lover"))
                     {
@@ -539,6 +545,8 @@ namespace TownOfUs.Patches
                     PlayerControl.LocalPlayer, "The Noclip is an impostor who can walk trought walls.");
                 if (role == RoleEnum.Falcon) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(
                     PlayerControl.LocalPlayer, "The Falcon is a crewmate who can zoom out map to see whats happening.");
+                if (role == RoleEnum.TimeLord) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(
+                    PlayerControl.LocalPlayer, "The TimeLord is a crewmate who can rewind time.");
                 if (role == RoleEnum.Undertaker) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(
                     PlayerControl.LocalPlayer, "The Undertaker is an impostor who can drag bodies to different locations.");
                 if (role == RoleEnum.Haunter) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(

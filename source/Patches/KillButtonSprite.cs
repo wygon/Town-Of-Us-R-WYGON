@@ -45,6 +45,7 @@ namespace TownOfUs
         private static Sprite Camp => TownOfUs.CampSprite;
         private static Sprite Zoom => TownOfUs.ZoomPlusActiveButton;
         private static Sprite WingMan => TownOfUs.WingManSprite;
+        private static Sprite Rewind => TownOfUs.RewindSprite;
 
         private static Sprite Kill;
 
@@ -128,6 +129,10 @@ namespace TownOfUs
             }else if (PlayerControl.LocalPlayer.Is(RoleEnum.Falcon))
             {
                 __instance.KillButton.graphic.sprite = WingMan;
+                flag = true;
+            }else if (PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord))
+            {
+                __instance.KillButton.graphic.sprite = Rewind;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Detective))

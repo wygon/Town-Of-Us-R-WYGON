@@ -893,7 +893,7 @@ namespace TownOfUs.Roles
                             selfFlag || deadFlag,
                             loverFlag,
                             player
-                        );//) + player.NameText.color.;
+                        );
                         if(role.ColorCriteria())
                             player.NameText.color = role.Color;
                     }
@@ -924,7 +924,7 @@ namespace TownOfUs.Roles
                     if (!(player.Data != null && player.Data.IsImpostor() && PlayerControl.LocalPlayer.Data.IsImpostor()))
                     {
                         //player.nameText().text = player.name + " " + player.GetDefaultOutfit().ColorId.ToString();
-                        player.nameText().text = player.name + " " + player.GetDefaultOutfit().ColorId;
+                        player.nameText().text = player.name; //+ " " + player.GetDefaultOutfit().ColorId;
                         player.nameText().color = Color.white;
                     }
 

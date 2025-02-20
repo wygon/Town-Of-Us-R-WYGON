@@ -47,6 +47,7 @@ namespace TownOfUs
         Lookout,
         Deputy,
         Falcon,
+        TimeLord,
 
         Miner,
         Swooper,

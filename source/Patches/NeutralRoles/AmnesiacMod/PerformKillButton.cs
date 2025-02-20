@@ -121,6 +121,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 case RoleEnum.Lookout:
                 case RoleEnum.Falcon:
                 case RoleEnum.Deputy:
+                case RoleEnum.TimeLord:
 
                     rememberImp = false;
                     rememberNeut = false;
@@ -319,6 +320,12 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 var falconRole = Role.GetRole<Falcon>(amnesiac);
                 falconRole.UsesLeft = CustomGameOptions.WingManMaxUses;
                 falconRole.LastZoom = DateTime.UtcNow;
+            }
+            
+            else if (role == RoleEnum.TimeLord)
+            {
+                var timeLord = Role.GetRole<TimeLord>(amnesiac);
+                timeLord.UsesLeft = CustomGameOptions.RewindMaxUses;
             }
 
             else if (role == RoleEnum.Hunter)
