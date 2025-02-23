@@ -23,7 +23,7 @@ Join our [Discord - PL](https://discord.gg/QspGyKzf) if you have any problems or
 | [Undertaker](#undertaker)    | [Medic](#medic)                   | [The Glitch](#the-glitch)        | [Multitasker](#multitasker)  |
 | [Venerer](#venerer)          | [Medium](#medium)                 | [Vampire](#vampire)              | [Radar](#radar)              |
 | [Warlock](#warlock)          | [Mystic](#mystic)                 | [Werewolf](#werewolf)            | [Saboteur](#saboteur)        |
-| [Noclip](#noclip)            | [Oracle](#oracle)                 |                                  | [Shy](#shy)                  |
+| [Noclip](#noclip)            | [Oracle](#oracle)                 | [Icenberg](#icenberg)            | [Shy](#shy)                  |
 |                              | [Politician](#politician)         |                                  | [Sixth Sense](#sixth-sense)  |
 |                              | [Prosecutor](#prosecutor)         |                                  | [Sleuth](#sleuth)            |
 |                              | [Seer](#seer)                     |                                  | [Tiebreaker](#tiebreaker)    |
@@ -1575,6 +1575,23 @@ The Werewolf needs to be the last killer alive to win the game.
 | Werewolf can Vent when Rampaged | Whether the Werewolf can Vent when Rampaged | Toggle | False |
 
 -----------------------
+## Icenberg
+### **Team: Neutral**
+
+The Icenberg is a Neutral role with its own win condition.\
+The Icenberg's aim is to kill everyone and be the last person standing.\
+The Icenberg can Freeze players, resulting in them being unable to move.
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Icenberg | The percentage probability of the Icenberg appearing | Percentage | 0% |
+| Freeze Cooldown | The cooldown of the Icenberg's Freeze button | Time | 25s |
+| Freeze Duration | The duration of the Icenberg's Freeze | Time | 3s |
+| Freeze Kill Cooldown | The cooldown of the Icenberg's Kill button | Time | 25s |
+| Icenberg Has Impostor Vision | Whether the Icenberg Has Impostor Vision | Toggle | False |
+| Icenberg can Vent | Whether the Icenberg can Vent| Toggle | True |
+
+-----------------------
 # Impostor Roles
 ## Escapist
 ### **Team: Impostors**
@@ -2066,7 +2083,11 @@ Auto adjustments will be made if there are not enough crewmates or impostors to 
 | Slot 13 | What role type can appear in Slot 13 | See Above for Buckets | Non-Imp |
 | Slot 14 | What role type can appear in Slot 14 | See Above for Buckets | Random Impostor |
 | Slot 15 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp |
-
+| Slot 16 | What role type can appear in Slot 16 | See Above for Buckets | Non-Imp |
+| Slot 18 | What role type can appear in Slot 18 | See Above for Buckets | Non-Imp |
+| Slot 17 | What role type can appear in Slot 17 | See Above for Buckets | Random Impostor |
+| Slot 19 | What role type can appear in Slot 19 | See Above for Buckets | Non-Imp |
+| Slot 20 | What role type can appear in Slot 20 | See Above for Buckets | Non-Imp |
 -----------------------
 # Map Settings
 | Name | Description | Type | Default |
