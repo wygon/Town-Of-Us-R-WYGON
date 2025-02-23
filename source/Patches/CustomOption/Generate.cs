@@ -17,7 +17,6 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption TrackerOn;
         public static CustomNumberOption TrapperOn;
         public static CustomNumberOption FalconOn;
-        public static CustomNumberOption TimeLordOn;
 
         public static CustomHeaderOption CrewKillingRoles;
         public static CustomNumberOption DeputyOn;
@@ -40,6 +39,7 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption ProsecutorOn;
         public static CustomNumberOption SwapperOn;
         public static CustomNumberOption TransporterOn;
+        public static CustomNumberOption TimeLordOn;
 
         public static CustomHeaderOption NeutralBenignRoles;
         public static CustomNumberOption AmnesiacOn;
@@ -58,6 +58,7 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption JuggernautOn;
         public static CustomNumberOption PlaguebearerOn;
         public static CustomNumberOption GlitchOn;
+        public static CustomNumberOption IcenbergOn;
         public static CustomNumberOption VampireOn;
         public static CustomNumberOption WerewolfOn;
 
@@ -246,6 +247,13 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption GlitchKillCooldownOption;
         public static CustomStringOption GlitchHackDistanceOption;
         public static CustomToggleOption GlitchVent;
+
+        public static CustomHeaderOption Icenberg;
+        public static CustomNumberOption IcenbergKillCooldown;
+        public static CustomNumberOption FreezeCooldown;
+        public static CustomNumberOption FreezeDuration;
+        public static CustomToggleOption IcenbergVent;
+        public static CustomToggleOption IcenbergImpVision;
 
         public static CustomHeaderOption Juggernaut;
         public static CustomNumberOption JuggKillCooldown;
@@ -531,6 +539,7 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption NoclipCooldown;
         public static CustomNumberOption NoclipDuration;
         public static CustomToggleOption NoclipVent;
+        
         public static Func<object, string> PercentFormat { get; } = value => $"{value:0}%";
         private static Func<object, string> CooldownFormat { get; } = value => $"{value:0.0#}s";
         private static Func<object, string> MultiplierFormat { get; } = value => $"{value:0.0#}x";
@@ -637,6 +646,8 @@ namespace TownOfUs.CustomOption
             PlaguebearerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#E6FFB3FF>Plaguebearer</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             GlitchOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            IcenbergOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#0078FFFF>Icenberg</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             VampireOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#262626FF>Vampire</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -1276,6 +1287,17 @@ namespace TownOfUs.CustomOption
                 new CustomStringOption(num++, MultiMenu.neutral, "Glitch Hack Distance", new[] { "Short", "Normal", "Long" });
             GlitchVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Glitch Can Vent", false);
+
+            Icenberg =
+                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#0078FFFF>Icenberg</color>");
+            IcenbergKillCooldown =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Icenberg Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            FreezeCooldown = new CustomNumberOption(num++, MultiMenu.neutral, "Freeze Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            FreezeDuration = new CustomNumberOption(num++, MultiMenu.neutral, "Freeze Duration", 3f, 1f, 6f, 0.5f, CooldownFormat);
+            IcenbergImpVision =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Icenberg Has Impostor Vision", false);
+            IcenbergVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Icenberg Can Vent", false);
 
             Vampire = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#262626FF>Vampire</color>");
             BiteCooldown =

@@ -13,6 +13,7 @@ namespace TownOfUs
         Executioner,
         Spy,
         Glitch,
+        Icenberg,
         Snitch,
         Arsonist,
         Altruist,

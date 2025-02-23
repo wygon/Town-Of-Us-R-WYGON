@@ -52,7 +52,7 @@ namespace TownOfUs.Roles
             if (flag2) return 0;
             return (num - (float)timespan.TotalMilliseconds) / 1000f;
         }
-
+        
         public float GetCooldown()
         {
             return RecordRewind.rewinding ? CustomGameOptions.RewindDuration : CustomGameOptions.RewindCooldown;

@@ -82,6 +82,11 @@ namespace TownOfUs
                         var glitch = Role.GetRole<Glitch>(PlayerControl.LocalPlayer);
                         if (glitch.IsUsingMimic) disableExtra = false;
                     }
+                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.Icenberg))
+                    {
+                        var icenberg = Role.GetRole<Icenberg>(PlayerControl.LocalPlayer);
+                        if (icenberg.IsUsingFreeze) disableExtra = false;
+                    }
                     else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf))
                     {
                         var ww = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
@@ -202,6 +207,16 @@ namespace TownOfUs
                         glitch.HackButton.graphic.color = Palette.DisabledClear;
                         glitch.HackButton.graphic.material.SetFloat("_Desat", 1f);
                     }
+                    if (PlayerControl.LocalPlayer.Is(RoleEnum.Icenberg))
+                    {
+                        var icenberg = Role.GetRole<Icenberg>(PlayerControl.LocalPlayer);
+                        if (disableExtra)
+                        {
+                            icenberg.FreezeButton.enabled = false;
+                            icenberg.FreezeButton.graphic.color = Palette.DisabledClear;
+                            icenberg.FreezeButton.graphic.material.SetFloat("_Desat", 1f);
+                        }
+                    }
 
                     var disableTimer = (DateTime.UtcNow - tickDictionary[PlayerControl.LocalPlayer.PlayerId]).TotalMilliseconds/1000;
                     if (MeetingHud.Instance || disableTimer > duration || PlayerControl.LocalPlayer?.Data.IsDead != false || AmongUsClient.Instance.GameState != InnerNetClient.GameStates.Started)
@@ -213,6 +228,12 @@ namespace TownOfUs
                             var glitch = Role.GetRole<Glitch>(PlayerControl.LocalPlayer);
                             glitch.MimicButton.enabled = true;
                             glitch.HackButton.enabled = true;
+                        }
+
+                        if (PlayerControl.LocalPlayer.Is(RoleEnum.Icenberg))
+                        {
+                            var icenberg = Role.GetRole<Icenberg>(PlayerControl.LocalPlayer);
+                            icenberg.FreezeButton.enabled = true;
                         }
 
                         tickDictionary.Remove(PlayerControl.LocalPlayer.PlayerId);

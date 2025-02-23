@@ -111,6 +111,7 @@ namespace TownOfUs
         public static Sprite ShootSprite;
         public static Sprite WingManSprite;
         public static Sprite RewindSprite;
+        public static Sprite FreezeSprite;
 
         public static Sprite ToUBanner;
         public static Sprite UpdateTOUButton;
@@ -218,6 +219,7 @@ namespace TownOfUs
             ShootSprite = CreateSprite("TownOfUs.Resources.Shoot.png");
             WingManSprite = CreateSprite("TownOfUs.Resources.Wingman.png");
             RewindSprite = CreateSprite("TownOfUs.Resources.Rewind.png");
+            FreezeSprite = CreateSprite("TownOfUs.Resources.Freeze.png");
 
             ToUBanner = CreateSprite("TownOfUs.Resources.TownOfUsBanner.png");
             UpdateTOUButton = CreateSprite("TownOfUs.Resources.UpdateToUButton.png");

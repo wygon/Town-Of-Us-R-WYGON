@@ -133,6 +133,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 case RoleEnum.Arsonist:
                 case RoleEnum.Amnesiac:
                 case RoleEnum.Glitch:
+                case RoleEnum.Icenberg:
                 case RoleEnum.Juggernaut:
                 case RoleEnum.Survivor:
                 case RoleEnum.GuardianAngel:
@@ -151,7 +152,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
             newRole = Role.GetRole(other);
             newRole.Player = amnesiac;
 
-            if ((role == RoleEnum.Glitch || role == RoleEnum.Juggernaut || role == RoleEnum.Pestilence ||
+            if ((role == RoleEnum.Glitch || role == RoleEnum.Icenberg || role == RoleEnum.Juggernaut || role == RoleEnum.Pestilence ||
                 role == RoleEnum.Werewolf) && PlayerControl.LocalPlayer == other)
             {
                 HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
@@ -222,7 +223,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                         vampire.RegenTask();
                     }
 
-                    if (role == RoleEnum.Arsonist || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
+                    if (role == RoleEnum.Arsonist || role == RoleEnum.Glitch || role == RoleEnum.Icenberg || role == RoleEnum.Plaguebearer ||
                             role == RoleEnum.Pestilence || role == RoleEnum.Werewolf || role == RoleEnum.Juggernaut
                              || role == RoleEnum.Vampire)
                     {
@@ -468,6 +469,13 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 glitchRole.LastHack = DateTime.UtcNow;
                 glitchRole.LastMimic = DateTime.UtcNow;
                 glitchRole.Hacked = null;
+            }
+            else if (role == RoleEnum.Icenberg)
+            {
+                var icenbergRole = Role.GetRole<Icenberg>(amnesiac);
+                icenbergRole.LastKill = DateTime.UtcNow;
+                icenbergRole.LastFreeze = DateTime.UtcNow;
+                //glitchRole.Hacked = null;
             }
 
             else if (role == RoleEnum.Juggernaut)

@@ -103,6 +103,11 @@ namespace TownOfUs.Patches
                         AddRoleMessage(RoleEnum.Glitch);
                         return false;
                     }
+                    else if (chatText.ToLower().StartsWith("/ice") || chatText.ToLower().StartsWith("/ ice"))
+                    {
+                        AddRoleMessage(RoleEnum.Icenberg);
+                        return false;
+                    }
                     else if (chatText.ToLower().StartsWith("/jest") || chatText.ToLower().StartsWith("/ jest"))
                     {
                         AddRoleMessage(RoleEnum.Jester);
@@ -527,6 +532,8 @@ namespace TownOfUs.Patches
                     PlayerControl.LocalPlayer, "The Executioner is a neutral evil role with the goal to vote out a specific player.");
                 if (role == RoleEnum.Glitch) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer,
                     "The Glitch is a neutral killer with the goal to kill everyone. In addition to killing, they can also hack players, disabling abilities and mimic players, changing their appearance to look like others.");
+                if (role == RoleEnum.Icenberg) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer,
+                    "The Icenberg is a neutral killer with the goal to kill everyone. In addition to killing, they can also freeze players for a certain time.");
                 if (role == RoleEnum.Jester) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(
                     PlayerControl.LocalPlayer, "The Jester is a neutral evil role with the goal to be voted out.");
                 if (role == RoleEnum.Phantom) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(

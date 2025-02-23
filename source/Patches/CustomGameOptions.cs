@@ -56,6 +56,7 @@ namespace TownOfUs
         public static int FalconOn => (int)Generate.FalconOn.Get();
         public static int TimeLordOn => (int)Generate.TimeLordOn.Get();
         public static int GlitchOn => (int)Generate.GlitchOn.Get();
+        public static int IcenbergOn => (int)Generate.IcenbergOn.Get();
         public static int MorphlingOn => (int)Generate.MorphlingOn.Get();
         public static int ExecutionerOn => (int)Generate.ExecutionerOn.Get();
         public static int SpyOn => (int)Generate.SpyOn.Get();
@@ -167,6 +168,11 @@ namespace TownOfUs
         public static float GlitchKillCooldown => Generate.GlitchKillCooldownOption.Get();
         public static int GlitchHackDistance => Generate.GlitchHackDistanceOption.Get();
         public static bool GlitchVent => Generate.GlitchVent.Get();
+        public static float IcenbergKillCooldown => Generate.IcenbergKillCooldown.Get();
+        public static float FreezeCooldown => Generate.FreezeCooldown.Get();
+        public static float FreezeDuration => Generate.FreezeDuration.Get();
+        public static bool IcenbergVent => Generate.IcenbergVent.Get();
+        public static bool IcenbergImpVision => Generate.IcenbergImpVision.Get();
         public static float JuggKCd => Generate.JuggKillCooldown.Get();
         public static float ReducedKCdPerKill => Generate.ReducedKCdPerKill.Get();
         public static bool JuggVent => Generate.JuggVent.Get();

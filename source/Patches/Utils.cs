@@ -27,6 +27,8 @@ using TownOfUs.NeutralRoles.SoulCollectorMod;
 using static TownOfUs.Roles.Glitch;
 using TownOfUs.Patches.NeutralRoles;
 using Il2CppSystem.Linq;
+using AsmResolver.DotNet.Code.Cil;
+using Reactor.Networking.Attributes;
 
 namespace TownOfUs
 {
@@ -35,7 +37,142 @@ namespace TownOfUs
     {
         internal static bool ShowDeadBodies = false;
         private static NetworkedPlayerInfo voteTarget = null;
+        //public static void Freeze(PlayerControl FreezePlayer)
+        //{
+        //    //if (PlayerControl.LocalPlayer.IsHypnotised()) return;
+        //    //originalSpeed = FreezePlayer.MyPhysics.Speed;
+        //    //FreezePlayer.MyPhysics.Speed = 0f;
+        //    //FreezePlayer.RcpFreeze();
+        //    if(FreezePlayer.MyPhysics != null)
+        //    {
+        //        FreezePlayer.MyPhysics.enabled = false;
+        //    }
+        //    if (PlayerControl.LocalPlayer.MyPhysics != null)
+        //    {
+        //        PlayerControl.LocalPlayer.MyPhysics.enabled = false;
+        //    }
+        //    Coroutines.Start(Utils.FlashCoroutine(Color.blue));
+        //    //FlashCoroutine(Color.blue, CustomGameOptions.FreezeDuration);
+        //    Debug.Log($"SPEED 0 to {FreezePlayer.name}");
+        //}
+        public static void Unfreeze(PlayerControl player)
+        {
+            Debug.Log($"SPEED to {player.name}");
+            if (player.MyPhysics != null)
+            {
+                player.MyPhysics.enabled = true;
+            }
+            if (PlayerControl.LocalPlayer.MyPhysics != null)
+            {
+                PlayerControl.LocalPlayer.MyPhysics.enabled = true;
+            }
+            //Coroutines.Start(Utils.FlashCoroutine(Color.red));
+            //player.MyPhysics.Speed = originalSpeed;
+            //if (PlayerControl.LocalPlayer.IsHypnotised()) return;
+            //player.moveable = true;
+        }
+        public static void UnfreezeAll(PlayerControl killer, PlayerControl player)
+        {
+            Coroutines.Start(IUnfreezeAllPlayers(killer, player));
+        }
 
+        public static IEnumerator IUnfreezeAllPlayers(PlayerControl killer, PlayerControl player)
+        {
+                if (player.MyPhysics != null)
+                {
+                    player.MyPhysics.enabled = true;
+                }
+
+                if (PlayerControl.LocalPlayer.MyPhysics != null)
+                {
+                    PlayerControl.LocalPlayer.MyPhysics.enabled = true;
+                }
+
+                Debug.Log($"Unfroze {player.name}");
+
+                // Opcjonalnie można dodać krótkie opóźnienie między odmrażaniem kolejnych graczy
+                yield return new WaitForSeconds(0.1f);
+        }
+        public static void Freeze(PlayerControl killer, PlayerControl target)
+        {
+            Coroutines.Start(IFreezePlayer(killer, target));
+        }
+
+        public static IEnumerator IFreezePlayer(PlayerControl killer, PlayerControl target)
+        {
+            //if (killer.Is(RoleEnum.Icenberg))
+            //{
+            //    Debug.Log("IF ICENBERG = TRUE");
+            //}
+            var icenberg = Role.GetRole<Icenberg>(killer);
+            //Debug.Log($"Icenberg {icenberg.Name} and lastfreeze {icenberg.LastFreeze} ");
+            //if (killer.MyPhysics != null)
+            //{
+            //    Debug.Log($"Killer IEnumerator {killer.name}");
+            //}
+            var lf = DateTime.UtcNow;
+            if (PlayerControl.LocalPlayer.MyPhysics != null && PlayerControl.LocalPlayer == target)
+            {
+                //Debug.Log($"Target IEnumerator {target.name}");
+                PlayerControl.LocalPlayer.MyPhysics.enabled = false;
+                Coroutines.Start(Utils.FlashCoroutine(Color.blue, CustomGameOptions.FreezeDuration));
+                //Debug.Log($"KONIEC FREEZE IF");
+            }
+            //FlashCoroutine(Color.blue, CustomGameOptions.FreezeDuration);
+            //Debug.Log($"SPEED 0 to {killer.name}");
+            var sigma = lf;//.AddSeconds(CustomGameOptions.FreezeDuration);
+            //var elapsedTime = (float)(DateTime.UtcNow - icenberg.LastFreeze).TotalSeconds;
+            //Debug.Log($"Sigma {sigma}");
+            while (true)
+            {
+            var elapsedTime = (float)(DateTime.UtcNow - lf).TotalSeconds;
+            var remainingTime = CustomGameOptions.FreezeDuration - elapsedTime;
+                //Debug.Log("ELO " + DateTime.UtcNow + " " + sigma + "  " + remainingTime);
+                if (PlayerControl.LocalPlayer == target && remainingTime <= 0)
+                {
+                    //Debug.Log($"POCZATEK UNFREEZE IF");
+                    PlayerControl.LocalPlayer.MyPhysics.enabled = true;
+                    //Debug.Log($"KONIEC UNFREEZE IF");
+                    break;
+                }
+                yield return new WaitForSeconds(0.5f);
+            }
+            //if (PlayerControl.LocalPlayer.MyPhysics == false && PlayerControl.LocalPlayer == target)
+            //var extraDelay = Random.RandomRangeInt(0, (int)(100 * (CustomGameOptions.BaitMaxDelay - CustomGameOptions.BaitMinDelay) + 1));
+            //if (CustomGameOptions.BaitMaxDelay <= CustomGameOptions.BaitMinDelay)
+            //    yield return new WaitForSeconds(CustomGameOptions.BaitMaxDelay + 0.01f);
+            //else
+            //    yield return new WaitForSeconds(CustomGameOptions.BaitMinDelay + 0.01f + extraDelay / 100f);
+            var bodies = Object.FindObjectsOfType<DeadBody>();
+            //Debug.Log("SYF 2");
+            if (AmongUsClient.Instance.AmHost)
+            {
+                foreach (var body in bodies)
+                {
+                    try
+                    {
+                        if (body.ParentId == target.PlayerId) {break;}
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            else
+            {
+                foreach (var body in bodies)
+                {
+                    try
+                    {
+                        if (body.ParentId == target.PlayerId) {break;}
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            //Debug.Log("SYF 3"); 
+        }
         public static void Morph(PlayerControl player, PlayerControl MorphedPlayer)
         {
             if (PlayerControl.LocalPlayer.IsHypnotised()) return;
@@ -66,14 +203,6 @@ namespace TownOfUs
                 player.cosmetics.colorBlindText.color = Color.clear;
             }
         }
-        //public static void RpcSetVisibility(byte playerId, bool isVisible)
-        //{
-        //    var player = Utils.PlayerById(playerId);
-        //    if (player != null)
-        //    {
-        //        player.Visible = isVisible;
-        //    }
-        //}
         public static void Unmorph(PlayerControl player)
         {
             if (PlayerControl.LocalPlayer.IsHypnotised()) return;
@@ -465,6 +594,11 @@ namespace TownOfUs
                             var glitch = Role.GetRole<Glitch>(player);
                             glitch.LastKill = DateTime.UtcNow;
                         }
+                        if (player.Is(RoleEnum.Icenberg))
+                        {
+                            var icenberg = Role.GetRole<Icenberg>(player);
+                            icenberg.LastKill = DateTime.UtcNow;
+                        }
                         else if (player.Is(RoleEnum.Juggernaut))
                         {
                             var jugg = Role.GetRole<Juggernaut>(player);
@@ -517,6 +651,11 @@ namespace TownOfUs
                 {
                     var glitch = Role.GetRole<Glitch>(player);
                     glitch.LastKill = DateTime.UtcNow;
+                }
+                if (player.Is(RoleEnum.Icenberg))
+                {
+                    var icenberg = Role.GetRole<Icenberg>(player);
+                    icenberg.LastKill = DateTime.UtcNow;
                 }
                 else if (player.Is(RoleEnum.Juggernaut))
                 {
@@ -992,6 +1131,14 @@ namespace TownOfUs
                     glitch.Player.SetKillTimer(CustomGameOptions.GlitchKillCooldown * CustomGameOptions.DiseasedMultiplier);
                     return;
                 }
+                
+                if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Icenberg))
+                {
+                    var icenberg = Role.GetRole<Icenberg>(killer);
+                    icenberg.LastKill = DateTime.UtcNow.AddSeconds((CustomGameOptions.DiseasedMultiplier - 1f) * CustomGameOptions.IcenbergKillCooldown);
+                    icenberg.Player.SetKillTimer(CustomGameOptions.IcenbergKillCooldown * CustomGameOptions.DiseasedMultiplier);
+                    return;
+                }
 
                 if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Juggernaut))
                 {
@@ -1390,6 +1537,16 @@ namespace TownOfUs
                 var transporter = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
                 transporter.LastTransported = DateTime.UtcNow;
             }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Falcon))
+            {
+                var falcon = Role.GetRole<Falcon>(PlayerControl.LocalPlayer);
+                falcon.LastZoom = DateTime.UtcNow;
+            }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord))
+            {
+                var timeLord = Role.GetRole<TimeLord>(PlayerControl.LocalPlayer);
+                timeLord.FinishRewind = DateTime.UtcNow;
+            }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Veteran))
             {
                 var veteran = Role.GetRole<Veteran>(PlayerControl.LocalPlayer);
@@ -1486,6 +1643,12 @@ namespace TownOfUs
                 glitch.LastKill = DateTime.UtcNow;
                 glitch.LastHack = DateTime.UtcNow;
                 glitch.LastMimic = DateTime.UtcNow;
+            }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Icenberg))
+            {
+                var icenberg = Role.GetRole<Icenberg>(PlayerControl.LocalPlayer);
+                icenberg.LastKill = DateTime.UtcNow;
+                icenberg.LastFreeze = DateTime.UtcNow;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut))
             {
@@ -1590,6 +1753,11 @@ namespace TownOfUs
             {
                 var swooper = Role.GetRole<Swooper>(PlayerControl.LocalPlayer);
                 swooper.LastSwooped = DateTime.UtcNow;
+            }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Noclip))
+            {
+                var noclip = Role.GetRole<Noclip>(PlayerControl.LocalPlayer);
+                noclip.LastNoclip = DateTime.UtcNow;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Venerer))
             {

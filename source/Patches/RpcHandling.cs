@@ -646,6 +646,7 @@ namespace TownOfUs
 
             // The Glitch cannot have Button Modifiers.
             canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Glitch));
+            canHaveModifier.RemoveAll(player => player.Is(RoleEnum.Icenberg));
             ButtonModifiers.SortModifiers(canHaveModifier.Count);
 
             foreach (var (type, id) in ButtonModifiers)
@@ -991,6 +992,24 @@ namespace TownOfUs
                         glitchRole.IsUsingMimic = true;
                         Utils.Morph(glitchPlayer, mimicPlayer);
                         break;
+                    case CustomRPC.Freeze:
+                        var icenbergPlayer = Utils.PlayerById(reader.ReadByte());
+                        var freezePlayer = Utils.PlayerById(reader.ReadByte());
+                        var icenbergRole = Role.GetRole<Icenberg>(icenbergPlayer);
+                        icenbergRole.FreezeTarget = freezePlayer;
+                        icenbergRole.IsUsingFreeze = true;
+                        Utils.Freeze(icenbergPlayer, freezePlayer);
+                        //Coroutines.Start(Icenberg.FreezePlayer(reader.ReadByte()));
+                        break;
+                    //case CustomRPC.Unfreeze:
+                    //    var icenbergPlayer = Utils.PlayerById(reader.ReadByte());
+                    //    var freezePlayer = Utils.PlayerById(reader.ReadByte());
+                    //    var icenbergRole = Role.GetRole<Icenberg>(icenbergPlayer);
+                    //    icenbergRole.FreezeTarget = freezePlayer;
+                    //    icenbergRole.IsUsingFreeze = true;
+                    //    Utils.Freeze(icenbergPlayer, freezePlayer);
+                    //    //Coroutines.Start(Icenberg.FreezePlayer(reader.ReadByte()));
+                    //    break;
                     case CustomRPC.RpcResetAnim:
                         var animPlayer = Utils.PlayerById(reader.ReadByte());
                         var theGlitchRole = Role.GetRole<Glitch>(animPlayer);
@@ -1001,6 +1020,10 @@ namespace TownOfUs
                     case CustomRPC.GlitchWin:
                         var theGlitch = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Glitch);
                         ((Glitch) theGlitch)?.Wins();
+                        break;
+                    case CustomRPC.IcenbergWin:
+                        var icenberg = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Icenberg);
+                        ((Icenberg) icenberg)?.Wins();
                         break;
                     case CustomRPC.JuggernautWin:
                         var juggernaut = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Juggernaut);
@@ -1683,6 +1706,9 @@ namespace TownOfUs
 
                 if (CustomGameOptions.GlitchOn > 0)
                     NeutralKillingRoles.Add((typeof(Glitch), CustomGameOptions.GlitchOn, true));
+                
+                if (CustomGameOptions.IcenbergOn > 0)
+                    NeutralKillingRoles.Add((typeof(Icenberg), CustomGameOptions.IcenbergOn, true));
 
                 if (CustomGameOptions.ArsonistOn > 0)
                     NeutralKillingRoles.Add((typeof(Arsonist), CustomGameOptions.ArsonistOn, true));
